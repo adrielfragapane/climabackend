@@ -1,0 +1,22 @@
+{
+    "city": "Nombre",
+    "coord": {
+        "lon": -122.08,
+        "lat": 37.39
+    },
+    "weather": {
+        "description": "clear sky",
+        "iconURL": "01d"
+    }
+    ,
+    "main": {
+        "temp": 28.5,   
+        "feels_like": 29,
+        "temp_min": 15,
+        "temp_max": 30,
+        "pressure": 1023,
+        "humidity": 80
+    }
+}                         
+  
+                          
