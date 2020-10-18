@@ -20,7 +20,7 @@ userController.singin = async (req,res) => {
             console.log(err)
             return res.json({status: 500, message: 'Error en el servidor'});
         }
-        const expiresIn = 10;
+        const expiresIn = 30;
         const accessToken = jwt.sign({id: user._id}, SECRET_KEY, {expiresIn: expiresIn});
         const userData = {
             email: user.email,
@@ -42,7 +42,7 @@ userController.login = async (req,res) => {
     else {
         const isValidPassword = bcrypt.compareSync(req.body.password, user.password);
         if (isValidPassword) {
-            const expiresIn = 10;
+            const expiresIn = 30;
             console.log(SECRET_KEY);
             const accessToken = jwt.sign({id: user._id}, SECRET_KEY, {expiresIn: expiresIn});
             const userData = {
