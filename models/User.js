@@ -1,6 +1,12 @@
 const mongoose = require('../databaseMongo');
-const { Schema } = mongoose;
 const bcrypt = require('bcryptjs');
+const { Schema } = mongoose;
+
+/**************************************************************************************
+ * 
+ *  MODELO DE USUARIO EN MONGODB
+ * 
+ **************************************************************************************/
 
 const UserSchema = new Schema({
     email: {type: String, required: true, unique: true},

@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+/**************************************************************************************
+ * 
+ *  MODELO DE CLIMA EN MONGODB
+ * 
+ **************************************************************************************/
+
 const WeatherSchema = new Schema({
 
     city: {type: String, required: true},

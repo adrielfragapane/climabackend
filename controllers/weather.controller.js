@@ -4,16 +4,30 @@ const Clima = require('../models/Weather');
 const User = require('../models/User');
 const climas = require('../clima');
 
-const climaController = {};
+/**************************************************************************************
+ * 
+ *  CONTROLADOR PRINCIPAL PARA LA OBTENCIÓN DE CIUDADES Y CLIMAS
+ * 
+ **************************************************************************************/
+
+const weatherController = {};
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
-climaController.getWheatherByCity = async (req,res) => {
+// Método para obtener los nombres de las ciudades disponibles
+weatherController.getCities = async (req,res) => {
+    const cities = await Clima.find({},{'_id': 0, 'city': 1});
+    res.json(cities);
+};
+
+// Método para obtener el clima de una ciudad en específico
+weatherController.getWheatherByCity = async (req,res) => {
     const clima = await Clima.findOne({city: req.params.city});
     return res.json(clima);
 };
 
-climaController.isAuthorized = (req,res,next) => {
+// Método para validar la autorización
+weatherController.isAuthorized = (req,res,next) => {
     const token = req.headers['authorization'] || '';
 
     jwt.verify(token, SECRET_KEY,async (err,value) => {
@@ -26,35 +40,6 @@ climaController.isAuthorized = (req,res,next) => {
     });
 }
 
-const checkToken = async token => {
-    const { id } = jwt.verify(token, SECRET_KEY);
-    const user = await User.findById(id);
-    return user !== null;
-}
 
 
-climaController.getCities = async (req,res) => {
-    const cities = await Clima.find({},{'_id': 0, 'city': 1});
-    res.json(cities);
-};
-
-
-climaController.createWheathers = async () => {
-    try {
-        await Clima.deleteMany();
-
-        climas.climas.map(async clima => {
-            //console.log(clima);
-            const newClima = new Clima(clima);
-            console.log(newClima);
-            await newClima.save()
-        });
-    }
-    catch(err) {
-        console.log(err)
-    }
-    
-}
-
-
-module.exports = climaController;
+module.exports = weatherController;
