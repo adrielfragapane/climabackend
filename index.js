@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
-//const Counter = require('./models/Counter');
+
 /********************************************SETTINGS********************************************/
 
 //Configuring the port
@@ -37,8 +37,7 @@ app.use('/user',require('./routes/user.routes'));
 app.use('/weather',require('./routes/weather.routes'));
 
 
-const climaController = require('./controllers/weather.controller');
-climaController.createWheathers();
+const weatherController = require('./controllers/weather.controller');
 
 //Starting the server
 const server = app.listen(app.get('port'), () => {
